@@ -1,0 +1,34 @@
+{
+  "name": "saudeid-blog-api",
+  "version": "1.0.0",
+  "description": "desafio técnico da SaúdeiD que consiste em uma API de Blog",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "jest --runInBand --detectOpenHandles --forceExit",
+    "start": "node .",
+    "dev": "nodemon .",
+    "lint": "eslint --ext .js -c .eslintrc.json ."
+  },
+  "keywords": [
+    "blog",
+    "api",
+    "SaúdeiD"
+  ],
+  "author": "Brenno Calado",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-rescue": "^1.1.31",
+    "frisby": "^2.1.3",
+    "jest": "^27.3.1",
+    "joi": "^17.4.2",
+    "mongodb": "^4.2.0",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3"
+  }
+}
