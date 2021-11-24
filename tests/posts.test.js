@@ -32,7 +32,7 @@ describe('POST post', () => {
 
     await db.collection('categories').insertMany(categoriesSeed);
   });
-  
+
   beforeEach(async () => {
     await db.collection('users').deleteMany({});
     await db.collection('posts').deleteMany({});
@@ -51,11 +51,11 @@ describe('POST post', () => {
       author,
       categories,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request: missing title');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request: missing title');
+      });
   });
   test('when theres no description', async () => {
     await frisby.post(`${url}/post`, {
@@ -63,11 +63,11 @@ describe('POST post', () => {
       author,
       categories,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request: missing description');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request: missing description');
+      });
   });
   test('when theres no author', async () => {
     await frisby.post(`${url}/post`, {
@@ -75,11 +75,11 @@ describe('POST post', () => {
       description,
       categories,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request: missing author');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request: missing author');
+      });
   });
   test('when theres no categories', async () => {
     await frisby.post(`${url}/post`, {
@@ -87,11 +87,11 @@ describe('POST post', () => {
       description,
       author,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request: missing categories');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request: missing categories');
+      });
   });
   test('when title is not a string', async () => {
     await frisby.post(`${url}/post`, {
@@ -100,11 +100,11 @@ describe('POST post', () => {
       author,
       categories,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request: title is not a string');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request: title is not a string');
+      });
   });
   test('when description is not a string', async () => {
     await frisby.post(`${url}/post`, {
@@ -113,11 +113,11 @@ describe('POST post', () => {
       author,
       categories,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request: description is not a string');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request: description is not a string');
+      });
   });
   test('when author is not a string', async () => {
     await frisby.post(`${url}/post`, {
@@ -126,11 +126,11 @@ describe('POST post', () => {
       author: wrongFormat,
       categories,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request: author is not a string');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request: author is not a string');
+      });
   });
   test('when categories is not an array of strings', async () => {
     await frisby.post(`${url}/post`, {
@@ -139,11 +139,11 @@ describe('POST post', () => {
       author,
       categories: wrongFormat,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request: categories is not an array of strings');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request: categories is not an array of strings');
+      });
   });
   test('when author does not exist', async () => {
     await frisby.post(`${url}/post`, {
@@ -152,11 +152,11 @@ describe('POST post', () => {
       author: unknownAuthor,
       categories,
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request, try again');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request, try again');
+      });
   });
   test('when one of the categories does not exist', async () => {
     await frisby.post(`${url}/post`, {
@@ -165,11 +165,11 @@ describe('POST post', () => {
       author,
       categories: [...categories, unknownCategory],
     })
-    .expect('status', 400)
-    .then((response) => {
-      const { json } = response;
-      expect(json.message).toBe('Invalid request, try again');
-    })
+      .expect('status', 400)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Invalid request, try again');
+      });
   });
   test('when creating a post is successful', async () => {
     await frisby.post(`${url}/post`, {
@@ -178,12 +178,12 @@ describe('POST post', () => {
       author,
       categories,
     })
-    .expect('status', 201)
-    .then((response) => {
-      const { json } = response;
-      expect(json.data).toHaveProperty('id');
-      expect(json.data.author).toBe(author);
-    })
+      .expect('status', 201)
+      .then((response) => {
+        const { json } = response;
+        expect(json.data).toHaveProperty('id');
+        expect(json.data.author).toBe(author);
+      });
   });
 });
 
