@@ -30,6 +30,7 @@ describe('POST post', () => {
     });
     db = connection.db(`${process.env.DBNAME}Test`);
 
+    await db.collection('categories').deleteMany({});
     await db.collection('categories').insertMany(categoriesSeed);
   });
 
@@ -41,7 +42,6 @@ describe('POST post', () => {
   });
 
   afterAll(async () => {
-    await db.collection('categories').deleteMany({});
     await connection.close();
   });
 
