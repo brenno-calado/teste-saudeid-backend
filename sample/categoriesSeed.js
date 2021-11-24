@@ -1,5 +1,17 @@
 module.exports = [
-  {
-
-  },
+  { category: 'music' },
+  { category: 'fashion' },
+  { category: 'car' },
+  { category: 'real state' },
+  { category: 'beauty' },
+  { category: 'travel' },
+  { category: 'design' },
+  { category: 'food' },
+  { category: 'wedding' },
+  { category: 'movie' },
+  { category: 'photography' },
+  { category: 'law' },
+  { category: 'health' },
+  { category: 'green' },
+  { category: 'technology' },
 ];

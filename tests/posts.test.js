@@ -3,6 +3,10 @@ require('dotenv').config();
 const frisby = require('frisby');
 const { MongoClient } = require('mongodb');
 
+const categoriesSeed = require('../sample/categoriesSeed');
+const postsSeed = require('../sample/postSeed');
+const usersSeed = require('../sample/usersSeed');
+
 const mongoDbUrl = `mongodb://localhost:27017/${process.env.DBNAME}`;
 const url = `http://localhost:${process.env.PORT}`;
 
@@ -15,12 +19,21 @@ describe('POST post', () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    db = connection.db(process.env.DBNAME)
+    db = connection.db(`${process.env.DBNAME}Test`);
+
+    await db.collection('categories').insertMany(categoriesSeed);
+  });
+  
+  beforeEach(async () => {
+    await db.collection('users').deleteMany({});
+    await db.collection('posts').deleteMany({});
+    await db.collection('users').insertMany(usersSeed);
+    await db.collection('posts').insertMany(postsSeed);
   });
 
-  beforeEach(async () => {
-    await db.collection('posts').deleteMany({});
-    await db.collection('posts').insertMany(PostSeed);
+  afterAll(async () => {
+    await db.collection('categories').deleteMany({});
+    await connection.close();
   });
 });
 
