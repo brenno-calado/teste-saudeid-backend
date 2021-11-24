@@ -142,7 +142,7 @@ describe('POST post', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('Invalid request: categories is not an array of strings');
+        expect(json.message).toBe('Invalid request: categories is not an array');
       });
   });
   test('when author does not exist', async () => {

@@ -1,13 +1,13 @@
-const insert = async (req, res) => {
-  const {
-    title, description, author, categories,
-  } = req.body;
+// const service = require('../services/posts');
+const { checkPost } = require('./schemas/posts');
 
-  return res.status(400).json({
-    data: {
-      title, description, author, categories,
-    },
-  });
+const insert = async (req, res) => {
+  const { error } = checkPost(req.body);
+  if (error) {
+    throw error;
+  }
+
+  return res.status(201).json({});
 };
 
 module.exports = { insert };
