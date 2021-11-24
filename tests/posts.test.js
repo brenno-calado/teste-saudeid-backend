@@ -35,6 +35,151 @@ describe('POST post', () => {
     await db.collection('categories').deleteMany({});
     await connection.close();
   });
+
+  test('when theres no title', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when theres no description', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when theres no author', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when theres no categories', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when title is not a string', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when description is not a string', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when author is not a string', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when categories is not an array of strings', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when author does not exist', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when one of the categories does not exist', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 400)
+    .then((response) => {
+      const { json } = response;
+      expect(json.message).toBe('');
+    })
+  });
+  test('when creating a post is successful', async () => {
+    await frisby.post(`${url}/post`, {
+      title: '',
+      description: '',
+      author: '',
+      categories: [],
+    })
+    .expect('status', 201)
+    .then((response) => {
+      const { json } = response;
+      expect(json.data).toHaveProperty('id');
+      expect(json.data.author).toBe('');
+    })
+  });
 });
 
 describe('GET all Posts', () => { });

@@ -5,6 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "jest --runInBand --detectOpenHandles --forceExit",
+    "coverage": "jest --coverage --coverageProvider=babel",
     "start": "node .",
     "dev": "nodemon .",
     "lint": "eslint --ext .js -c .eslintrc.json ."
