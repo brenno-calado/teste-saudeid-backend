@@ -1,4 +1,3 @@
-// const service = require('../services/posts');
 const { checkPost } = require('./schemas/posts');
 const service = require('../services/posts');
 
@@ -7,10 +6,9 @@ const insert = async (req, res) => {
   if (error) throw error;
 
   const [result, err] = await service.insert(req.body);
-  console.log(result);
   if (err) throw err;
 
-  return res.status(201).json({});
+  return res.status(201).json({ data: result });
 };
 
 module.exports = { insert };

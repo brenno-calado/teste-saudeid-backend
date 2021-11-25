@@ -15,14 +15,14 @@ const insert = async ({
     return [null, { details: [{ message: 'category not found' }] }];
   }
 
-  const result = postsModel.insert({
+  const result = await postsModel.insertOne({
     title,
     description,
     author,
     categories,
   });
 
-  return result;
+  return [{ id: result.insertedId, author }, null];
 };
 
 module.exports = { insert };
