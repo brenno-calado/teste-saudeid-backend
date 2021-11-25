@@ -14,7 +14,7 @@ const usersSeed = require('../sample/usersSeed');
 const mongoDbUrl = `${MONGO_HOST}${MONGO_PORT}/${DB_NAME}${NODE_ENV}`;
 const url = `${HOST}${PORT}`;
 
-describe('GET all Posts', () => {
+describe('PUT /post/:id', () => {
   let connection;
   let db;
 

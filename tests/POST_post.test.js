@@ -17,7 +17,7 @@ const {
 const mongoDbUrl = `${MONGO_HOST}${MONGO_PORT}/${DB_NAME}${NODE_ENV}`;
 const url = `${HOST}${PORT}`;
 
-describe('POST post', () => {
+describe('POST /post', () => {
   let connection;
   let db;
 
@@ -184,9 +184,3 @@ describe('POST post', () => {
       });
   });
 });
-
-describe('GET one Post', () => { });
-
-describe('PUT post', () => { });
-
-describe('DELETE post', () => { });
