@@ -42,14 +42,15 @@ describe('GET /post', () => {
       .expect('status', 200)
       .then((response) => {
         const { body } = response;
-        expect(body).toHaveProperty('data');
-        expect(Array.isArray(body.data)).toBe(true);
-        expect(body.data.length).toBe(16);
-        expect(body.data[0].title).toBe('Lorem Ipsum');
-        expect(body.data[0].description).toContain('dolor');
-        expect(typeof body.data[0].author).toBe('string');
-        expect(typeof body.data[0].categories[0]).toBe('string');
-        expect(Array.isArray(body.data[0].categories)).toBe(true);
+        const parsed = JSON.parse(body);
+        expect(parsed).toHaveProperty('data');
+        expect(Array.isArray(parsed.data)).toBe(true);
+        expect(parsed.data.length).toBe(16);
+        expect(parsed.data[0].title).toBe('Lorem Ipsum');
+        expect(parsed.data[0].description).toContain('dolor');
+        expect(typeof parsed.data[0].author).toBe('string');
+        expect(typeof parsed.data[0].categories[0]).toBe('string');
+        expect(Array.isArray(parsed.data[0].categories)).toBe(true);
       });
   });
 });

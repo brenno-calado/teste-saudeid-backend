@@ -2,6 +2,11 @@ const postsModel = require('../models/posts');
 const categoriesModel = require('../models/categories');
 const usersModel = require('../models/users');
 
+const find = async () => {
+  const result = await postsModel.find({});
+  return [result, null];
+};
+
 const insert = async ({
   title, description, author, categories,
 }) => {
@@ -25,4 +30,4 @@ const insert = async ({
   return [{ id: result.insertedId, author }, null];
 };
 
-module.exports = { insert };
+module.exports = { find, insert };

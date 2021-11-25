@@ -1,5 +1,9 @@
 const connection = require('./connection');
 
+const find = async (query) => (
+  connection().then((db) => db.collection('posts').find(query).toArray())
+);
+
 const insertOne = async ({
   title, description, author, categories,
 }) => (
@@ -9,4 +13,4 @@ const insertOne = async ({
     }))
 );
 
-module.exports = { insertOne };
+module.exports = { find, insertOne };
