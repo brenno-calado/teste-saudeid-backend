@@ -11,8 +11,8 @@ const insert = async ({
   }
 
   const categoriesExist = await categoriesModel.find(categories);
-  if (categoriesExist.length() !== categories.length()) {
-    return [null, {}];
+  if (categoriesExist.length !== categories.length) {
+    return [null, { details: [{ message: 'category not found' }] }];
   }
 
   const result = postsModel.insert({
