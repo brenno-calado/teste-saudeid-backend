@@ -6,7 +6,7 @@ const insert = async (req, res) => {
   const { error } = checkPost(req.body);
   if (error) throw error;
 
-  const [result, err] = service.insert(req.body);
+  const [result, err] = await service.insert(req.body);
   console.log(result);
   if (err) throw err;
 

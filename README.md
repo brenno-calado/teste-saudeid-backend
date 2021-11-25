@@ -9,7 +9,7 @@
 - `npm i`
 
 4. Adicione um arquivo `.env` na pasta principal do projeto com as variáveis:
-- `DBNAME` com o nome que o banco terá
+- `DB_NAME` com o nome que o banco terá
 - `PORT` com o número da porta que o servidor usará. Como este arquivo não é enviado para servidor, a porta é decidida pelo servidor
 
 5. Caso queirar adicionar uma nova feature ou deseja consertar um bug, crie uma branch a partir da `default`

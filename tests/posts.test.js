@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const frisby = require('frisby');
 const { MongoClient } = require('mongodb');
+const { HOST, PORT, DB_NAME, MONGO_HOST, MONGO_PORT, NODE_ENV } = process.env;
 
 const categoriesSeed = require('../sample/categoriesSeed');
 const postsSeed = require('../sample/postSeed');
@@ -16,8 +17,8 @@ const unknownAuthor = 'Michelangelo Brasiliensis';
 const unknownCategory = 'cats';
 const wrongFormat = 42;
 
-const mongoDbUrl = `mongodb://localhost:27017/${process.env.DBNAME}`;
-const url = `http://localhost:${process.env.PORT}`;
+const mongoDbUrl = `${MONGO_HOST}${MONGO_PORT}/${DB_NAME}${NODE_ENV}`;
+const url = `${HOST}${PORT}`;
 
 describe('POST post', () => {
   let connection;
@@ -28,7 +29,7 @@ describe('POST post', () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    db = connection.db(`${process.env.DBNAME}Test`);
+    db = connection.db(`${process.env.DB_NAME}${process.env.NODE_ENV}`);
 
     await db.collection('categories').deleteMany({});
     await db.collection('categories').insertMany(categoriesSeed);
