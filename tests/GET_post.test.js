@@ -25,18 +25,31 @@ describe('GET /post', () => {
     });
     db = connection.db(`${process.env.DB_NAME}${process.env.NODE_ENV}`);
 
+    await db.collection('users').deleteMany({});
+    await db.collection('users').insertMany(usersSeed);
     await db.collection('categories').deleteMany({});
     await db.collection('categories').insertMany(categoriesSeed);
-  });
-
-  beforeEach(async () => {
-    await db.collection('users').deleteMany({});
     await db.collection('posts').deleteMany({});
-    await db.collection('users').insertMany(usersSeed);
     await db.collection('posts').insertMany(postsSeed);
   });
 
   afterAll(async () => {
     await connection.close();
+  });
+
+  test('1 - when a response is successful', async () => {
+    await frisby.get(`${url}/post`)
+      .expect('status', 200)
+      .then((response) => {
+        const { body } = response;
+        expect(body).toHaveProperty('data');
+        expect(Array.isArray(body.data)).toBe(true);
+        expect(body.data.length).toBe(16);
+        expect(body.data[0].title).toBe('Lorem Ipsum');
+        expect(body.data[0].description).toContain('dolor');
+        expect(typeof body.data[0].author).toBe('string');
+        expect(typeof body.data[0].categories[0]).toBe('string');
+        expect(Array.isArray(body.data[0].categories)).toBe(true);
+      });
   });
 });
