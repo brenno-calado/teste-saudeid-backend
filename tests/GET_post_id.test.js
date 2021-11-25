@@ -71,6 +71,11 @@ describe('GET /post/:id', () => {
       });
   });
   test('2 - when a post does not exist', async () => {
-
+    await frisby.get(`${url}/post/9001`)
+      .expect('status', 404)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('post not found')
+      });
   });
 });
