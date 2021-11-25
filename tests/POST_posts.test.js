@@ -2,20 +2,17 @@ require('dotenv').config();
 
 const frisby = require('frisby');
 const { MongoClient } = require('mongodb');
-const { HOST, PORT, DB_NAME, MONGO_HOST, MONGO_PORT, NODE_ENV } = process.env;
+
+const {
+  HOST, PORT, DB_NAME, MONGO_HOST, MONGO_PORT, NODE_ENV,
+} = process.env;
 
 const categoriesSeed = require('../sample/categoriesSeed');
 const postsSeed = require('../sample/postSeed');
 const usersSeed = require('../sample/usersSeed');
-
-const title = 'Is Thy Node as Thou thinks?';
-const description = 'To Node or not to Node? That is the request';
-const author = 'Evelina Escobar Cedraz';
-const categories = ['health', 'technology'];
-
-const unknownAuthor = 'Michelangelo Brasiliensis';
-const unknownCategory = 'cats';
-const wrongFormat = 42;
+const {
+  title, description, author, categories, unknownAuthor, unknownCategory, wrongFormat,
+} = require('./mocks/post.mock');
 
 const mongoDbUrl = `${MONGO_HOST}${MONGO_PORT}/${DB_NAME}${NODE_ENV}`;
 const url = `${HOST}${PORT}`;
@@ -46,7 +43,7 @@ describe('POST post', () => {
     await connection.close();
   });
 
-  test('when theres no title', async () => {
+  test('1 - when theres no title', async () => {
     await frisby.post(`${url}/post`, {
       description,
       author,
@@ -58,7 +55,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request: missing title');
       });
   });
-  test('when theres no description', async () => {
+  test('2 - when theres no description', async () => {
     await frisby.post(`${url}/post`, {
       title,
       author,
@@ -70,7 +67,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request: missing description');
       });
   });
-  test('when theres no author', async () => {
+  test('3 - when theres no author', async () => {
     await frisby.post(`${url}/post`, {
       title,
       description,
@@ -82,7 +79,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request: missing author');
       });
   });
-  test('when theres no categories', async () => {
+  test('4 - when theres no categories', async () => {
     await frisby.post(`${url}/post`, {
       title,
       description,
@@ -94,7 +91,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request: missing categories');
       });
   });
-  test('when title is not a string', async () => {
+  test('5 - when title is not a string', async () => {
     await frisby.post(`${url}/post`, {
       title: wrongFormat,
       description,
@@ -107,7 +104,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request: title is not a string');
       });
   });
-  test('when description is not a string', async () => {
+  test('6 - when description is not a string', async () => {
     await frisby.post(`${url}/post`, {
       title,
       description: wrongFormat,
@@ -120,7 +117,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request: description is not a string');
       });
   });
-  test('when author is not a string', async () => {
+  test('7 - when author is not a string', async () => {
     await frisby.post(`${url}/post`, {
       title,
       description,
@@ -133,7 +130,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request: author is not a string');
       });
   });
-  test('when categories is not an array of strings', async () => {
+  test('8 - when categories is not an array of strings', async () => {
     await frisby.post(`${url}/post`, {
       title,
       description,
@@ -146,7 +143,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request: categories is not an array');
       });
   });
-  test('when author does not exist', async () => {
+  test('9 - when author does not exist', async () => {
     await frisby.post(`${url}/post`, {
       title,
       description,
@@ -159,7 +156,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request, try again');
       });
   });
-  test('when one of the categories does not exist', async () => {
+  test('10 - when one of the categories does not exist', async () => {
     await frisby.post(`${url}/post`, {
       title,
       description,
@@ -172,7 +169,7 @@ describe('POST post', () => {
         expect(json.message).toBe('Invalid request, try again');
       });
   });
-  test('when creating a post is successful', async () => {
+  test('11 - when creating a post is successful', async () => {
     await frisby.post(`${url}/post`, {
       title,
       description,
@@ -187,8 +184,6 @@ describe('POST post', () => {
       });
   });
 });
-
-describe('GET all Posts', () => { });
 
 describe('GET one Post', () => { });
 
