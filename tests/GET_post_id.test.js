@@ -79,4 +79,12 @@ describe('GET /post/:id', () => {
         expect(json.message).toBe('Invalid id request: 9001')
       });
   });
+  test('3 - when a post id is not found', async () => {
+    await frisby.get(`${url}/post/61a0432ec93be120a6507340`)
+      .expect('status', 404)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Post 61a0432ec93be120a6507340 not found')
+      });
+  })
 });
