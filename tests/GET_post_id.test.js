@@ -61,14 +61,13 @@ describe('GET /post/:id', () => {
       .then((response) => {
         const { json } = response;
         console.log(json.data);
-        const parsed = JSON.parse(json);
-        expect(parsed).toHaveProperty('data');
-        expect(typeof parsed.data).toBe('object');
-        expect(parsed.data.id).toBe(result.id);
-        expect(parsed.data.title).toBe(title);
-        expect(parsed.data.description).toContain(description);
-        expect(parsed.data.author).toBe(author);
-        expect(Array.isArray(parsed.data.categories)).toEqual(categories);
+        expect(json).toHaveProperty('data');
+        expect(typeof json.data).toBe('object');
+        expect(json.data._id).toBe(result.id);
+        expect(json.data.title).toBe(title);
+        expect(json.data.description).toContain(description);
+        expect(json.data.author).toBe(author);
+        expect(json.data.categories).toEqual(categories);
       });
   });
   test('2 - when a post id is invalid', async () => {
