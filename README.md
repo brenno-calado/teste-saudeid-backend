@@ -19,11 +19,9 @@
   <p align="center">
     API de Blogs com tabela de posts, autores e categorias. Projeto realizado utilizando TDD com Node.js e MongoDB.
     <br />
-    <a href="https://github.com/brenno-calado/teste-saudeid-backend"><strong>Explore a documentação no postman</strong></a>
+    <a href="https://documenter.getpostman.com/view/16367914/UVJbHxpK"><strong>Explore a documentação no postman</strong></a>
     <br />
     <br />
-    <a href="https://github.com/brenno-calado/teste-saudeid-backend">Utilize o mock de servidor no postman</a>
-    ·
     <a href="https://github.com/brenno-calado/teste-saudeid-backend/issues">Reportar Bug</a>
     ·
     <a href="https://github.com/brenno-calado/teste-saudeid-backend/issues">Solicitar uma Feature</a>
