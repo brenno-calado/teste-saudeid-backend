@@ -3,6 +3,13 @@ const postsModel = require('../models/posts');
 const categoriesModel = require('../models/categories');
 const usersModel = require('../models/users');
 
+const deleteOne = async ({ id }) => {
+  const result = await postsModel.deleteOne({ _id: new ObjectID(id) });
+  if (!result) return [null, `Post ${id} not found`];
+
+  return [result, null];
+};
+
 const find = async () => {
   const result = await postsModel.find({});
   return [result, null];
@@ -75,5 +82,5 @@ const updateOne = async (
 };
 
 module.exports = {
-  find, findOne, insert, updateOne,
+  deleteOne, find, findOne, insert, updateOne,
 };

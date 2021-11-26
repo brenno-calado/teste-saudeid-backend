@@ -1,5 +1,9 @@
 const connection = require('./connection');
 
+const deleteOne = async (query) => (
+  connection().then((db) => db.collection('posts').deleteOne(query))
+);
+
 const find = async (query) => (
   connection().then((db) => db.collection('posts').find(query).toArray())
 );
@@ -23,5 +27,5 @@ const updateOne = async (filter, update) => (
 );
 
 module.exports = {
-  find, findOne, insertOne, updateOne,
+  deleteOne, find, findOne, insertOne, updateOne,
 };

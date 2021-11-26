@@ -11,6 +11,10 @@ const categoriesSeed = require('../sample/categoriesSeed');
 const postsSeed = require('../sample/postSeed');
 const usersSeed = require('../sample/usersSeed');
 
+const {
+  title, description, author, categories,
+} = require('./mocks/post.mock');
+
 const mongoDbUrl = `${MONGO_HOST}${MONGO_PORT}/${DB_NAME}${NODE_ENV}`;
 const url = `${HOST}${PORT}`;
 

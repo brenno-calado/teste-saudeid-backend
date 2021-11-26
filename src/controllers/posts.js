@@ -1,6 +1,19 @@
 const { checkPost, checkFindOne } = require('./schemas/posts');
 const service = require('../services/posts');
 
+const deleteOne = async (req, res) => {
+  const { error } = checkFindOne(req.params);
+  if (error) throw error;
+
+  const [result, err] = await service.deleteOne(req.params);
+  if (err && !result) {
+    const wrapError = { code: 404, message: err };
+    throw wrapError;
+  }
+
+  res.status(200).json({ message: 'Deleted post successfully.' });
+};
+
 const find = async (req, res) => {
   const [result, err] = await service.find();
   if (err) throw err;
@@ -53,5 +66,5 @@ const updateOne = async (req, res) => {
 };
 
 module.exports = {
-  find, findOne, insert, updateOne,
+  deleteOne, find, findOne, insert, updateOne,
 };
