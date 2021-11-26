@@ -13,8 +13,10 @@ const findOne = async (req, res) => {
   if (error) throw error;
 
   const [result, err] = await service.findOne(req.params);
-  const wrapError = { code: 404, message: err };
-  if (err) throw wrapError;
+  if (err) {
+    const wrapError = { code: 404, message: err };
+    throw wrapError;
+  }
 
   return res.status(200).send({ data: result });
 };
@@ -24,10 +26,32 @@ const insert = async (req, res) => {
   if (error) throw error;
 
   const [result, err] = await service.insert(req.body);
-  const wrapError = { code: 400, message: err };
-  if (err) throw wrapError;
+  if (err) {
+    const wrapError = { code: 400, message: err };
+    throw wrapError;
+  }
 
   return res.status(201).json({ data: result });
 };
 
-module.exports = { find, findOne, insert };
+const updateOne = async (req, res) => {
+  const { error } = checkPost(req.body);
+  if (error) throw error;
+
+  const { error: paramsError } = checkFindOne(req.params);
+  if (paramsError) throw error;
+
+  const [result, err] = await service.updateOne(req.params, req.body);
+  if (err) {
+    const wrapError = { code: 400, message: err };
+    throw wrapError;
+  }
+
+  return res.status(200).json(
+    { message: `Updated ${result.modifiedCount} post ${req.params.id} successfully.` },
+  );
+};
+
+module.exports = {
+  find, findOne, insert, updateOne,
+};

@@ -9,4 +9,5 @@ module.exports = [
   { username: 'Dara Bezerra Mexia' },
   { username: 'Nina Queirós Quintanilha' },
   { username: 'Cristal Pinto Fontes' },
+  { username: 'SaúdeiD' },
 ];

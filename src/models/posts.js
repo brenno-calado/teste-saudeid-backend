@@ -17,4 +17,11 @@ const insertOne = async ({
     }))
 );
 
-module.exports = { find, findOne, insertOne };
+const updateOne = async (filter, update) => (
+  connection().then((db) => db.collection('posts')
+    .updateOne(filter, { $set: update }))
+);
+
+module.exports = {
+  find, findOne, insertOne, updateOne,
+};

@@ -38,4 +38,42 @@ const insert = async ({
   return [{ id: result.insertedId, author }, null];
 };
 
-module.exports = { find, findOne, insert };
+const updateOne = async (
+  { id },
+  {
+    title, description, author, categories,
+  },
+) => {
+  const [postResult, error] = await findOne({ id });
+  if (error && !postResult) return [null, error];
+
+  const userExists = await usersModel.findOne(author);
+  if (!userExists) {
+    return [null, 'author not found'];
+  }
+
+  const categoriesExist = await categoriesModel.find(categories);
+  if (categoriesExist.length !== categories.length) {
+    return [null, 'category not found'];
+  }
+
+  const result = await postsModel.updateOne(
+    { _id: new ObjectID(id) },
+    {
+      title,
+      description,
+      author,
+      categories,
+    },
+  );
+
+  if (result.modifiedCount === 0) {
+    return [null, 'document not modified'];
+  }
+
+  return [result, null];
+};
+
+module.exports = {
+  find, findOne, insert, updateOne,
+};

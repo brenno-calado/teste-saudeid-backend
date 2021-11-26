@@ -61,15 +61,15 @@ describe('PUT /post/:id', () => {
       });
 
     await frisby.put(`${url}/post/${result.id}`, {
-      newTitle,
-      newDescription,
-      newAuthor,
-      newCategories,
+      title: newTitle,
+      description: newDescription,
+      author: newAuthor,
+      categories: newCategories,
     })
       .expect('status', 200)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe(`Updated post ${result.id} successfully.`)
+        expect(json.message).toBe(`Updated 1 post ${result.id} successfully.`)
       });
 
     await frisby.get(`${url}/post/${result.id}`)
