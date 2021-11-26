@@ -39,4 +39,34 @@ describe('DELETE /post', () => {
   afterAll(async () => {
     await connection.close();
   });
+
+  test('1 - when post is deleted successfully', async () => {
+    let result;
+
+    await frisby.post(`${url}/post`, {
+      title,
+      description,
+      author,
+      categories,
+    })
+      .expect('status', 201)
+      .then((response) => {
+        const { json } = response;
+        result = json.data;
+      });
+
+    await frisby.delete(`${url}/post/${result.id}`)
+      .expect('status', 200)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Deleted post successfully.');
+      })
+
+      await frisby.get(`${url}/post/${result.id}`)
+      .expect('status', 404)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe(`Post ${result.id} not found`);
+      });
+  });
 });
