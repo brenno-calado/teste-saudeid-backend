@@ -7,6 +7,12 @@ const postSchema = Joi.object({
   categories: Joi.array().items(Joi.string().required()).required(),
 });
 
+const findOneSchema = Joi.object({
+  id: Joi.string().pattern(/^[0-9a-fA-F]{24}$/),
+});
+
+const checkFindOne = (params) => findOneSchema.validate(params);
+
 const checkPost = (body) => postSchema.validate(body);
 
-module.exports = { checkPost };
+module.exports = { checkPost, checkFindOne };

@@ -153,7 +153,7 @@ describe('POST /post', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('Invalid request, try again');
+        expect(json.message).toBe('Invalid request, author not found');
       });
   });
   test('10 - when one of the categories does not exist', async () => {
@@ -166,7 +166,7 @@ describe('POST /post', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('Invalid request, try again');
+        expect(json.message).toBe('Invalid request, category not found');
       });
   });
   test('11 - when creating a post is successful', async () => {

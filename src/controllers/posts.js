@@ -1,13 +1,22 @@
-const { checkPost } = require('./schemas/posts');
+const { checkPost, checkFindOne } = require('./schemas/posts');
 const service = require('../services/posts');
 
 const find = async (req, res) => {
   const [result, err] = await service.find();
   if (err) throw err;
 
-  console.log(result);
-
   return res.status(200).json({ data: result });
+};
+
+const findOne = async (req, res) => {
+  const { error } = checkFindOne(req.params);
+  console.log(error.details[0]);
+  if (error) throw error;
+
+  const [result, err] = await service.findOne();
+  if (err) throw err;
+
+  return res.status(200).send({ data: result });
 };
 
 const insert = async (req, res) => {
@@ -15,9 +24,10 @@ const insert = async (req, res) => {
   if (error) throw error;
 
   const [result, err] = await service.insert(req.body);
-  if (err) throw err;
+  const wrapError = { code: 400, message: err };
+  if (err) throw wrapError;
 
   return res.status(201).json({ data: result });
 };
 
-module.exports = { find, insert };
+module.exports = { find, findOne, insert };

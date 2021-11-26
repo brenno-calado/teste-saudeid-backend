@@ -52,15 +52,16 @@ describe('GET /post/:id', () => {
     })
       .expect('status', 201)
       .then((response) => {
-        const { body } = response;
-        result = JSON.parse(body);
+        const { json } = response;
+        result = json.data;
       });
 
     await frisby.get(`${url}/post/${result.id}`)
       .expect('status', 200)
       .then((response) => {
-        const { body } = response;
-        const parsed = JSON.parse(body);
+        const { json } = response;
+        console.log(json.data);
+        const parsed = JSON.parse(json);
         expect(parsed).toHaveProperty('data');
         expect(typeof parsed.data).toBe('object');
         expect(parsed.data.id).toBe(result.id);
@@ -70,12 +71,12 @@ describe('GET /post/:id', () => {
         expect(Array.isArray(parsed.data.categories)).toEqual(categories);
       });
   });
-  test('2 - when a post does not exist', async () => {
+  test('2 - when a post id is invalid', async () => {
     await frisby.get(`${url}/post/9001`)
-      .expect('status', 404)
+      .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('post not found')
+        expect(json.message).toBe('Invalid id request: 9001')
       });
   });
 });

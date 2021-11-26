@@ -12,12 +12,12 @@ const insert = async ({
 }) => {
   const userExists = await usersModel.findOne(author);
   if (!userExists) {
-    return [null, { details: [{ message: 'author not found' }] }];
+    return [null, 'author not found'];
   }
 
   const categoriesExist = await categoriesModel.find(categories);
   if (categoriesExist.length !== categories.length) {
-    return [null, { details: [{ message: 'category not found' }] }];
+    return [null, 'category not found'];
   }
 
   const result = await postsModel.insertOne({
