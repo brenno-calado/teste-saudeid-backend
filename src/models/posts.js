@@ -4,6 +4,10 @@ const find = async (query) => (
   connection().then((db) => db.collection('posts').find(query).toArray())
 );
 
+const findOne = async (query) => (
+  connection().then((db) => db.collection('posts').findOne(query))
+);
+
 const insertOne = async ({
   title, description, author, categories,
 }) => (
@@ -13,4 +17,4 @@ const insertOne = async ({
     }))
 );
 
-module.exports = { find, insertOne };
+module.exports = { find, findOne, insertOne };

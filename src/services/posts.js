@@ -1,9 +1,17 @@
+const { ObjectID } = require('bson');
 const postsModel = require('../models/posts');
 const categoriesModel = require('../models/categories');
 const usersModel = require('../models/users');
 
 const find = async () => {
   const result = await postsModel.find({});
+  return [result, null];
+};
+
+const findOne = async ({ id }) => {
+  const result = await postsModel.findOne({ _id: new ObjectID(id) });
+  if (!result) return [null, `Post ${id} not found`];
+
   return [result, null];
 };
 
@@ -30,4 +38,4 @@ const insert = async ({
   return [{ id: result.insertedId, author }, null];
 };
 
-module.exports = { find, insert };
+module.exports = { find, findOne, insert };

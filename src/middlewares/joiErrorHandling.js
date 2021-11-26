@@ -3,7 +3,6 @@ module.exports = (err, _req, res, next) => {
   if (!isJoi) next();
 
   const { details: [details] } = err;
-  console.log(details);
   const errorTypes = {
     'any.required': (key, _value) => `Invalid request: missing ${key}`,
     'string.base': (key, _value) => `Invalid request: ${key} is not a string`,

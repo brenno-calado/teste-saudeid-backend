@@ -10,11 +10,11 @@ const find = async (req, res) => {
 
 const findOne = async (req, res) => {
   const { error } = checkFindOne(req.params);
-  console.log(error.details[0]);
   if (error) throw error;
 
-  const [result, err] = await service.findOne();
-  if (err) throw err;
+  const [result, err] = await service.findOne(req.params);
+  const wrapError = { code: 404, message: err };
+  if (err) throw wrapError;
 
   return res.status(200).send({ data: result });
 };
