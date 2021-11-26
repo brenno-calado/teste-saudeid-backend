@@ -69,9 +69,6 @@
 <!-- Inicializando -->
 ## Inicializando
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Pré-requisitos
 
 Certifique-se de que possui o Node e o npm instalado:
@@ -127,7 +124,7 @@ sudo apt systemctl start mongod
 - [x] PUT /post/:id
 - [x] DELETE /post/:id
 - [] 100% Coverage test
-- [] Postman Documentation
+- [x] Postman Documentation
 - [] Postman Server Mock
 
 Veja as [issues abertas](https://github.com/brenno-calado/teste-saudeid-backend/issues) Para uma lista completa das features a serem implementadas e bugs detectados.
